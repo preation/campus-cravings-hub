@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import * as RechartsPrimitive from "recharts"
 
@@ -353,6 +354,143 @@ function getPayloadConfigFromPayload(
     : config[key as keyof typeof config]
 }
 
+// Adding BarChart component
+export interface BarChartProps {
+  data: any[]
+  index: string
+  categories: string[]
+  colors?: string[]
+  valueFormatter?: (value: number) => string
+  yAxisWidth?: number
+}
+
+const BarChart = ({
+  data,
+  index,
+  categories,
+  colors = ["#2563eb"],
+  valueFormatter = (value: number) => `${value}`,
+  yAxisWidth = 50,
+}: BarChartProps) => {
+  // Create a config object for the chart colors
+  const chartConfig: ChartConfig = {};
+  categories.forEach((category, i) => {
+    chartConfig[category] = {
+      label: category,
+      color: colors[i % colors.length],
+    };
+  });
+
+  return (
+    <ChartContainer config={chartConfig}>
+      <RechartsPrimitive.BarChart data={data}>
+        <RechartsPrimitive.XAxis 
+          dataKey={index} 
+          axisLine={false}
+          tickLine={false}
+          tick={{ fontSize: 12 }}
+          tickMargin={10}
+        />
+        <RechartsPrimitive.YAxis 
+          width={yAxisWidth}
+          axisLine={false}
+          tickLine={false}
+          tickFormatter={valueFormatter}
+          tick={{ fontSize: 12 }}
+          tickMargin={10}
+        />
+        <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" vertical={false} />
+        <ChartTooltip 
+          content={<ChartTooltipContent />}
+        />
+        <ChartLegend
+          content={<ChartLegendContent />}
+          verticalAlign="top"
+          height={60}
+        />
+        {categories.map((category, i) => (
+          <RechartsPrimitive.Bar
+            key={category}
+            dataKey={category}
+            fill={colors[i % colors.length]}
+            radius={[4, 4, 0, 0]}
+          />
+        ))}
+      </RechartsPrimitive.BarChart>
+    </ChartContainer>
+  );
+};
+
+// Adding AreaChart component
+export interface AreaChartProps {
+  data: any[]
+  index: string
+  categories: string[]
+  colors?: string[]
+  valueFormatter?: (value: number) => string
+  yAxisWidth?: number
+}
+
+const AreaChart = ({
+  data,
+  index,
+  categories,
+  colors = ["#2563eb"],
+  valueFormatter = (value: number) => `${value}`,
+  yAxisWidth = 50,
+}: AreaChartProps) => {
+  // Create a config object for the chart colors
+  const chartConfig: ChartConfig = {};
+  categories.forEach((category, i) => {
+    chartConfig[category] = {
+      label: category,
+      color: colors[i % colors.length],
+    };
+  });
+
+  return (
+    <ChartContainer config={chartConfig}>
+      <RechartsPrimitive.AreaChart data={data}>
+        <RechartsPrimitive.XAxis 
+          dataKey={index} 
+          axisLine={false}
+          tickLine={false}
+          tick={{ fontSize: 12 }}
+          tickMargin={10}
+        />
+        <RechartsPrimitive.YAxis 
+          width={yAxisWidth}
+          axisLine={false}
+          tickLine={false}
+          tickFormatter={valueFormatter}
+          tick={{ fontSize: 12 }}
+          tickMargin={10}
+        />
+        <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" vertical={false} />
+        <ChartTooltip 
+          content={<ChartTooltipContent />}
+        />
+        <ChartLegend
+          content={<ChartLegendContent />}
+          verticalAlign="top"
+          height={60}
+        />
+        {categories.map((category, i) => (
+          <RechartsPrimitive.Area
+            key={category}
+            dataKey={category}
+            fill={colors[i % colors.length]}
+            fillOpacity={0.2}
+            stroke={colors[i % colors.length]}
+            strokeWidth={2}
+            type="monotone"
+          />
+        ))}
+      </RechartsPrimitive.AreaChart>
+    </ChartContainer>
+  );
+};
+
 export {
   ChartContainer,
   ChartTooltip,
@@ -360,4 +498,7 @@ export {
   ChartLegend,
   ChartLegendContent,
   ChartStyle,
+  BarChart,
+  AreaChart
 }
+
