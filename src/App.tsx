@@ -17,6 +17,13 @@ import Register from "@/pages/Register";
 import StudentDashboard from "@/pages/StudentDashboard";
 import AdminDashboard from "@/pages/AdminDashboard";
 import NgoDashboard from "@/pages/NgoDashboard";
+import FrontPageVideo from "./components/FrontPageVideo";
+
+function App() {
+  return (
+    <FrontPageVideo />
+  );
+}
 
 const queryClient = new QueryClient();
 
