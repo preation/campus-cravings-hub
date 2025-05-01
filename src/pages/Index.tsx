@@ -1,7 +1,7 @@
 
-import Home from "./Home";
+import { Navigate } from "react-router-dom";
 
-// Redirecting from Index to Home component
-const Index = () => <Home />;
+// Simply redirect to the Home component
+const Index = () => <Navigate to="/" replace />;
 
 export default Index;
