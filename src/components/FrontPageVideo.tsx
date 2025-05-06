@@ -5,7 +5,7 @@ export default function FrontPageVideo() {
   return (
     <div className="w-full h-screen flex items-center justify-center bg-black">
       <video
-        src="/your-video.mp4"
+        src="/5614323-hd_1280_720_50fps.mp4"
         autoPlay
         loop
         muted
