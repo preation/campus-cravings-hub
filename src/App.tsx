@@ -19,12 +19,11 @@ import AdminDashboard from "@/pages/AdminDashboard";
 import NgoDashboard from "@/pages/NgoDashboard";
 import FrontPageVideo from "./components/FrontPageVideo";
 
-function App() {
+function FrontPageApp() {
   return (
-    <FrontPageVideo />
+    <FrontPageVideo/>
   );
 }
-
 const queryClient = new QueryClient();
 
 const App = () => (
